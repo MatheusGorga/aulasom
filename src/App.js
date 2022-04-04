@@ -1,7 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Component } from "react";
 
-function App() {
+class App extends Component {
+  state = {
+    name: "Matheus Gorga",
+    counter: 0,
+  };
+
+  handleClick = () => {
+    this.setState({ name: "Dev Jr" });
+  };
+
+  handleAClick = (event) => {
+    event.preventDefault();
+    const { counter } = this.state;
+    this.setState({ counter: counter + 1 });
+  };
+
+  render() {
+    const { name, counter } = this.state;
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p onClick={this.handleClick}>
+            {name} - {counter}
+          </p>
+          <a
+            onClick={this.handleAClick}
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Link
+          </a>
+        </header>
+      </div>
+    );
+  }
+}
+
+/* function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,5 +63,5 @@ function App() {
     </div>
   );
 }
-
+ */
 export default App;
