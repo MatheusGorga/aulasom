@@ -1,0 +1,13 @@
+button {
+  background-color: cornflowerblue;
+  padding: 20px;
+  font-size: 2rem;
+  font-weight: 300;
+  cursor: pointer;
+  border: none;
+}
+
+button:disabled {
+  background-color: antiquewhite;
+  cursor: not-allowed;
+}
