@@ -13,3 +13,9 @@ export const loadPost = async () => {
 
   return postsAndPhotos;
 };
+
+/* 
+      fetch("https://jsonplaceholder.typicode.com/posts")
+        .then((response) => response.json())
+        .then((posts) => this.setState({ posts }));
+   */

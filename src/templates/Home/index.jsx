@@ -1,8 +1,9 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import "./styles.css";
 import { Posts } from "../../components/Posts/Index";
 import { loadPost } from "../../utils/load-posts";
 import { Button } from "../../components/Button";
+import { InputText } from "../../components/TextInput";
 
 class Home extends Component {
   state = {
@@ -10,9 +11,8 @@ class Home extends Component {
     allPosts: [],
     page: 0,
     postsPerPage: 3,
+    serchValue: "",
   };
-
-  /* https://jsonplaceholder.typicode.com/posts */
 
   async componentDidMount() {
     await this.loadPosts();
@@ -41,25 +41,43 @@ class Home extends Component {
     });
   };
 
-  /* 
-      fetch("https://jsonplaceholder.typicode.com/posts")
-        .then((response) => response.json())
-        .then((posts) => this.setState({ posts }));
-   */
+  handleChange = (e) => {
+    const { value } = e.target;
+    this.setState({ serchValue: value });
+  };
 
   render() {
-    const { posts, page, postsPerPage, allPosts } = this.state;
+    const { posts, page, postsPerPage, allPosts, serchValue } = this.state;
     const noMorePosts = page + postsPerPage >= allPosts.length;
+    const filterePosts = serchValue
+      ? allPosts.filter((post) => {
+          return post.title
+            .toLowerCase()
+            .includes(serchValue.toLocaleLowerCase());
+        })
+      : posts;
 
     return (
       <section className="container">
-        <Posts posts={posts} />
+        <h1>Posts - Curso</h1>
+        <div className="input-container">
+          <InputText serchValue={serchValue} handleChange={this.handleChange} />
+        </div>
+
+        {filterePosts.length > 0 ? (
+          <Posts posts={filterePosts} />
+        ) : (
+          <h3>nenhum post encontrado</h3>
+        )}
+
         <div className="button-container">
-          <Button
-            disabled={noMorePosts ? true : false}
-            text="Load more posts"
-            onClick={this.loadMorePost}
-          />
+          {!serchValue && (
+            <Button
+              disabled={noMorePosts ? true : false}
+              text="Load more posts"
+              onClick={this.loadMorePost}
+            />
+          )}
         </div>
       </section>
     );
