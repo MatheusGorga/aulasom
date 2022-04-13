@@ -1,5 +1,3 @@
-import "./index";
-
 export const PostCard = (props) => {
   const { post } = props;
 
