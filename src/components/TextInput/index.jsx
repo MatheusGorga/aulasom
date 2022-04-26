@@ -6,7 +6,7 @@ export const InputText = ({ serchValue, handleChange }) => {
       <label>
         <input
           type="search"
-          placeholder="Search..."
+          placeholder="Pesquise"
           value={serchValue}
           onChange={handleChange}
         />
